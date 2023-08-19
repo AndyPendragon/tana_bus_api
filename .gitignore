@@ -1,3 +1,6 @@
+# Environement variable
+.env
+
 # Compiled class file
 *.class
 
