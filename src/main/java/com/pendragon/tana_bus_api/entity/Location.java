@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class District {
-    private int district_id;
+public class Location {
+    private int location_id;
     private String name;
 }
