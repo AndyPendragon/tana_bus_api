@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -13,13 +14,13 @@ import com.pendragon.tana_bus_api.entity.Stop;
 @Repository
 public class StopRepository {
     private Connection connection;
-    private List<Stop> allStops;
-
+    
     public StopRepository(Connection connection) {
         this.connection = connection;
     }
-
+    
     public List<Stop> getAllStops() throws SQLException {
+        List<Stop> allStops = new ArrayList<>();
         String sql = "SELECT * FROM stop";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -29,8 +30,8 @@ public class StopRepository {
                 allStops.add(new Stop(
                     result.getInt("stop_id"), 
                     result.getString("name"), 
-                    result.getDouble("longitude"), 
-                    result.getDouble("latitude")
+                    result.getFloat("longitude"), 
+                    result.getFloat("latitude")
                 ));            
             }
         } catch (SQLException e) {
