@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 public class DatabaseConnection {
     @Bean
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DBConfiguration.URL, DBConfiguration.USERNAME, DBConfiguration.PASSWORD);
+        return DriverManager.getConnection(
+            DBConfiguration.URL, 
+            DBConfiguration.USERNAME, 
+            DBConfiguration.PASSWORD);
     }
 }
