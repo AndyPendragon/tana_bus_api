@@ -31,7 +31,9 @@ public class StopRepository {
                     result.getInt("stop_id"), 
                     result.getString("name"), 
                     result.getFloat("longitude"), 
-                    result.getFloat("latitude")
+                    result.getFloat("latitude"),
+                    result.getString("location_id"),
+                    result.getString("next_stop_id")
                 ));            
             }
         } catch (SQLException e) {
