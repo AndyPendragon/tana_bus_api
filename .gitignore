@@ -1,5 +1,5 @@
-# Environement variable
-.env
+# DATABASE configuration
+src/main/java/com/pendragon/tana_bus_api/repository/DBConfiguration.java
 
 # Compiled class file
 *.class
