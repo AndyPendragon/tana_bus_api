@@ -11,11 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Stop {
+public class StopRoute {
     private int stop_id;
-    private String name;
-    private double longitude;
-    private double latitude;
-    private String location_id;
-    private String next_stop_id;
+    private int route_id;
 }
