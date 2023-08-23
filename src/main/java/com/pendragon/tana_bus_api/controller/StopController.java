@@ -19,7 +19,12 @@ public class StopController {
         this.service = service;
     }
 
-    @GetMapping("/stop")
+    @GetMapping("/ping")
+    public String ping(){
+        return "pong";
+    }
+
+    @GetMapping("/stops")
     public List<Stop> getAllStops() throws SQLException{
         return service.getAllStops();
     }
