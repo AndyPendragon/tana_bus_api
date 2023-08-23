@@ -37,10 +37,10 @@ public class StopController {
         return service.getStopById(id);
     }
 
-    @DeleteMapping("/stop/{id}")
-    public String deleteStopById(@PathVariable int id) throws SQLException{
-        return service.deleteStopById(id);
-    }
+    @DeleteMapping("/stop")
+    public List<Object> deleteStop(@RequestBody Stop stop) throws SQLException {
+            return service.deleteStop(stop);
+        }
 
     @PostMapping("/stop")
     public Stop addStops(@RequestBody Stop stop) throws SQLException {
@@ -51,5 +51,4 @@ public class StopController {
     public Stop updateStops(@RequestBody Stop stop) throws SQLException {
         return service.updateStops(stop);
     }
-
 }

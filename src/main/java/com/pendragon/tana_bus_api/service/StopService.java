@@ -24,8 +24,8 @@ public class StopService {
         return repository.getStopById(id);
     }
 
-    public String deleteStopById(int id) throws SQLException {
-        return repository.deleteStopById(id);
+    public List<Object> deleteStop(Stop stop) throws SQLException {
+        return repository.deleteStop(stop);
     }
 
     public Stop addStops(Stop stop) throws SQLException {

@@ -63,19 +63,18 @@ public class StopRepository {
         return null;
     }
 
-    public String deleteStopById(int id) throws SQLException {
+    public List<Object> deleteStop(Stop stopToDelete) throws SQLException {
         String sql = "DELETE FROM stop WHERE stop_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, stopToDelete.getStop_id());
             int rowsDeleted = preparedStatement.executeUpdate();
+
             if (rowsDeleted == 0) {
-                return "Stop id: " + id + " was not found";
+                return List.of("Stop id: " + stopToDelete.getStop_id() + " not found", stopToDelete);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return "Stop id: " + id + " was deleted successfully !";
+        return List.of("Stop id: " + stopToDelete.getStop_id() + " deleted successfully !", stopToDelete);
     }
 
     public void addStops(Stop stopToAdd) throws SQLException {
