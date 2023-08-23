@@ -12,8 +12,8 @@ public class DatabaseConnection {
     @Bean
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
-            DBConfiguration.URL, 
-            DBConfiguration.USERNAME, 
-            DBConfiguration.PASSWORD);
+                DBConfiguration.URL,
+                DBConfiguration.USERNAME,
+                DBConfiguration.PASSWORD);
     }
 }

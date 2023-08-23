@@ -23,24 +23,24 @@ public class StopController {
     }
 
     @GetMapping("/ping")
-    public String ping(){
+    public String ping() {
         return "pong";
     }
 
     @GetMapping("/stops")
-    public List<Stop> getAllStops() throws SQLException{
+    public List<Stop> getAllStops() throws SQLException {
         return service.getAllStops();
     }
 
     @GetMapping("/stop/{id}")
-    public Stop getStopById(@PathVariable int id) throws SQLException{
+    public Stop getStopById(@PathVariable int id) throws SQLException {
         return service.getStopById(id);
     }
 
     @DeleteMapping("/stop")
     public List<Object> deleteStop(@RequestBody Stop stop) throws SQLException {
-            return service.deleteStop(stop);
-        }
+        return service.deleteStop(stop);
+    }
 
     @PostMapping("/stop")
     public Stop addStops(@RequestBody Stop stop) throws SQLException {
