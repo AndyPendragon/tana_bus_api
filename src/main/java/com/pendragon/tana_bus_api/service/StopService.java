@@ -20,11 +20,11 @@ public class StopService {
         return repository.getAllStops();
     }
 
-    public Stop addStops(Stop stops) {
+    public Stop addStops(Stop stop) {
         try {
-            this.repository.addStops(stops);
+            this.repository.addStops(stop);
             
-            return stops;
+            return stop;
         } catch (SQLException e) {
             throw new RuntimeException("There was an error when inserting the stop.");
         }

@@ -19,13 +19,13 @@ public class StopController {
         this.service = service;
     }
 
-    @GetMapping("/stops")
+    @GetMapping("/stop")
     public List<Stop> getAllStops() throws SQLException{
         return service.getAllStops();
     }
 
-    @PostMapping("/stops")
-    public Stop addStops(@RequestBody Stop stops) {
-        return service.addStops(stops);
+    @PostMapping("/stop")
+    public Stop addStops(@RequestBody Stop stop) {
+        return service.addStops(stop);
     }
 }

@@ -41,16 +41,16 @@ public class StopRepository {
         return allStops;
     }
 
-    public void addStops(Stop stopsToAdd) throws SQLException{
+    public void addStops(Stop stopToAdd) throws SQLException{
         String sql = "INSERT INTO stop (name, longitude, latitude, location_id, next_stop_id)"+
             "VALUES (?,?,?,?,?);";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, stopsToAdd.getName());
-            statement.setDouble(2, stopsToAdd.getLongitude());
-            statement.setDouble(3, stopsToAdd.getLatitude());
-            statement.setString(4, stopsToAdd.getLocation_id());
-            statement.setInt(5, stopsToAdd.getNext_stop_id());
+            statement.setString(1, stopToAdd.getName());
+            statement.setDouble(2, stopToAdd.getLongitude());
+            statement.setDouble(3, stopToAdd.getLatitude());
+            statement.setString(4, stopToAdd.getLocation_id());
+            statement.setInt(5, stopToAdd.getNext_stop_id());
 
             statement.executeUpdate();
         }
