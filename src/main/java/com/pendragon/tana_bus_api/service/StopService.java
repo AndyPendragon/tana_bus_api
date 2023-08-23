@@ -23,6 +23,10 @@ public class StopService {
     public Stop getStopById(int id) throws SQLException{
         return repository.getStopById(id);
     }
+    
+    public String deleteStopById(int id) throws SQLException{
+        return repository.deleteStopById(id);
+    }
 
     public Stop addStops(Stop stop) {
         try {

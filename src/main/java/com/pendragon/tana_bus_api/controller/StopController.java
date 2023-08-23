@@ -3,6 +3,7 @@ package com.pendragon.tana_bus_api.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,8 +36,14 @@ public class StopController {
         return service.getStopById(id);
     }
 
+    @DeleteMapping("/stop/{id}")
+    public String deleteStopById(@PathVariable int id) throws SQLException{
+        return service.deleteStopById(id);
+    }
+
     @PostMapping("/stop")
     public Stop addStops(@RequestBody Stop stop) {
         return service.addStops(stop);
     }
+
 }
