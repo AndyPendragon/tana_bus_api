@@ -32,4 +32,9 @@ public class StopService {
         this.repository.addStops(stop);
         return stop;
     }
+
+    public Stop updateStops(Stop stop) throws SQLException {
+        this.repository.updateStops(stop);
+        return stop;
+    }
 }
