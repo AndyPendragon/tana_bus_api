@@ -19,6 +19,10 @@ public class StopService {
     public List<Stop> getAllStops() throws SQLException{
         return repository.getAllStops();
     }
+    
+    public Stop getStopById(int id) throws SQLException{
+        return repository.getStopById(id);
+    }
 
     public Stop addStops(Stop stop) {
         try {

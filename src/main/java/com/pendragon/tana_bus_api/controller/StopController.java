@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,11 @@ public class StopController {
     @GetMapping("/stops")
     public List<Stop> getAllStops() throws SQLException{
         return service.getAllStops();
+    }
+
+    @GetMapping("/stop/{id}")
+    public Stop getStopById(@PathVariable int id) throws SQLException{
+        return service.getStopById(id);
     }
 
     @PostMapping("/stop")

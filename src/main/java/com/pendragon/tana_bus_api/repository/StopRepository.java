@@ -41,9 +41,31 @@ public class StopRepository {
         return allStops;
     }
 
-    public void addStops(Stop stopToAdd) throws SQLException{
-        String sql = "INSERT INTO stop (name, longitude, latitude, location_id, next_stop_id)"+
-            "VALUES (?,?,?,?,?);";
+    public Stop getStopById(int id) throws SQLException {
+        String sql = "SELECT * FROM stop WHERE stop_id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet result = preparedStatement.executeQuery();
+
+            if (result.next()) {
+                return new Stop(
+                        result.getInt("stop_id"),
+                        result.getString("name"),
+                        result.getFloat("longitude"),
+                        result.getFloat("latitude"),
+                        result.getString("location_id"),
+                        result.getInt("next_stop_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void addStops(Stop stopToAdd) throws SQLException {
+        String sql = "INSERT INTO stop (name, longitude, latitude, location_id, next_stop_id)" +
+                "VALUES (?,?,?,?,?);";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, stopToAdd.getName());
