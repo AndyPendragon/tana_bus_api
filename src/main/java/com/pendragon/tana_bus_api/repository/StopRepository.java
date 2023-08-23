@@ -21,7 +21,7 @@ public class StopRepository {
 
     public List<Stop> getAllStops() throws SQLException {
         List<Stop> allStops = new ArrayList<>();
-        String sql = "SELECT * FROM stop";
+        String sql = "SELECT * FROM stop ORDER BY stop_id ASC";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet result = preparedStatement.executeQuery();
