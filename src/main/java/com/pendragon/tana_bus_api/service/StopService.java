@@ -19,4 +19,14 @@ public class StopService {
     public List<Stop> getAllStops() throws SQLException{
         return repository.getAllStops();
     }
+
+    public Stop addStops(Stop stops) {
+        try {
+            this.repository.addStops(stops);
+            
+            return stops;
+        } catch (SQLException e) {
+            throw new RuntimeException("There was an error when inserting the stop.");
+        }
+    }
 }

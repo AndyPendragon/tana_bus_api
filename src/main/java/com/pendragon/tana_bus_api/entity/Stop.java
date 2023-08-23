@@ -17,5 +17,5 @@ public class Stop {
     private double longitude;
     private double latitude;
     private String location_id;
-    private String next_stop_id;
+    private int next_stop_id;
 }

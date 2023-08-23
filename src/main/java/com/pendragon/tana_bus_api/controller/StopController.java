@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pendragon.tana_bus_api.entity.Stop;
@@ -20,5 +22,10 @@ public class StopController {
     @GetMapping("/stops")
     public List<Stop> getAllStops() throws SQLException{
         return service.getAllStops();
+    }
+
+    @PostMapping("/stops")
+    public Stop addStops(@RequestBody Stop stops) {
+        return service.addStops(stops);
     }
 }
