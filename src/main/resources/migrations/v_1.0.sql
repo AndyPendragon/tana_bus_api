@@ -26,5 +26,5 @@ CREATE TABLE route (
 CREATE TABLE stop_route (
     stop_route_id SERIAL PRIMARY KEY,
     stop_id INTEGER REFERENCES stop (stop_id),
-    route_id INTEGER REFERENCES route (route_id),
+    route_id INTEGER REFERENCES route (route_id)
 );
