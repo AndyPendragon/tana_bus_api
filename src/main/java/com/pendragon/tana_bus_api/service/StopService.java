@@ -15,26 +15,21 @@ public class StopService {
     public StopService(StopRepository repository) {
         this.repository = repository;
     }
-    
-    public List<Stop> getAllStops() throws SQLException{
+
+    public List<Stop> getAllStops() throws SQLException {
         return repository.getAllStops();
     }
-    
-    public Stop getStopById(int id) throws SQLException{
+
+    public Stop getStopById(int id) throws SQLException {
         return repository.getStopById(id);
     }
-    
-    public String deleteStopById(int id) throws SQLException{
+
+    public String deleteStopById(int id) throws SQLException {
         return repository.deleteStopById(id);
     }
 
-    public Stop addStops(Stop stop) {
-        try {
-            this.repository.addStops(stop);
-            
-            return stop;
-        } catch (SQLException e) {
-            throw new RuntimeException("There was an error when inserting the stop.");
-        }
+    public Stop addStops(Stop stop) throws SQLException {
+        this.repository.addStops(stop);
+        return stop;
     }
 }

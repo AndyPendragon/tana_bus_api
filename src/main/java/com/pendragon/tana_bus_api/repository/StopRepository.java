@@ -32,7 +32,7 @@ public class StopRepository {
                         result.getString("name"),
                         result.getFloat("longitude"),
                         result.getFloat("latitude"),
-                        result.getString("location_id"),
+                        result.getInt("location_id"),
                         result.getInt("next_stop_id")));
             }
         } catch (SQLException e) {
@@ -54,7 +54,7 @@ public class StopRepository {
                         result.getString("name"),
                         result.getFloat("longitude"),
                         result.getFloat("latitude"),
-                        result.getString("location_id"),
+                        result.getInt("location_id"),
                         result.getInt("next_stop_id"));
             }
         } catch (SQLException e) {
@@ -79,17 +79,18 @@ public class StopRepository {
     }
 
     public void addStops(Stop stopToAdd) throws SQLException {
-        String sql = "INSERT INTO stop (name, longitude, latitude, location_id, next_stop_id)" +
-                "VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO stop (name, longitude, latitude, location_id, next_stop_id) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, stopToAdd.getName());
             statement.setDouble(2, stopToAdd.getLongitude());
             statement.setDouble(3, stopToAdd.getLatitude());
-            statement.setString(4, stopToAdd.getLocation_id());
+            statement.setInt(4, stopToAdd.getLocation_id());
             statement.setInt(5, stopToAdd.getNext_stop_id());
 
             statement.executeUpdate();
+
+            System.out.println("The stop " + stopToAdd.getName() + "was be added successfully !");
         }
     }
 }

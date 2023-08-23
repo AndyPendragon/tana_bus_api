@@ -42,7 +42,7 @@ public class StopController {
     }
 
     @PostMapping("/stop")
-    public Stop addStops(@RequestBody Stop stop) {
+    public Stop addStops(@RequestBody Stop stop) throws SQLException {
         return service.addStops(stop);
     }
 
