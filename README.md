@@ -26,7 +26,7 @@ Go to the project directory
 
 Into your IDE : Install dependencies
 
-```bash
+```
 // Terminal output
 [INFO] Scanning for projects...
 [INFO] 
@@ -63,7 +63,6 @@ TanaBusApiApplication in 4.075 s (process running for 4.886)
 ```
 
 Go to the server address
-```http
+```
 localhost:8080
 ```
-
