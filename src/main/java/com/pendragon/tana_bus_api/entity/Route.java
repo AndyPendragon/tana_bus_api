@@ -15,4 +15,5 @@ public class Route {
     private int route_id;
     private String name;
     private String company;
+    private int direction_id;
 }
