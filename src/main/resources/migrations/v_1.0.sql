@@ -1,6 +1,6 @@
--- CREATE DATABASE tana_bus_api_v3;
+CREATE DATABASE tana_bus_api_v3;
 
--- \c tana_bus_api_v3;
+\c tana_bus_api_v3;
 
 CREATE TABLE location (
     location_id SERIAL PRIMARY KEY,
