@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.pendragon.tana_bus_api.entity.StopRoute;
@@ -39,7 +41,7 @@ public class StopRouteRepository {
         return allStopRoutes;
     }
 
-    public StopRoute getStopRouteById(int id) throws SQLException {
+    public Object getStopRouteById(int id) throws SQLException {
         String sql = "SELECT * FROM stop_route WHERE stop_route_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -53,13 +55,12 @@ public class StopRouteRepository {
                         result.getInt("route_id")
                         );
                     }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+        } 
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+
     }
 
-    public List<Object> deleteStopRoute(StopRoute stopRouteToDelete) throws SQLException {
+    public Object deleteStopRoute(StopRoute stopRouteToDelete) throws SQLException {
         String sql = "DELETE FROM stop_route WHERE stop_route_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -67,13 +68,13 @@ public class StopRouteRepository {
             int rowsDeleted = preparedStatement.executeUpdate();
 
             if (rowsDeleted == 0) {
-                return List.of("StopRoute id: " + stopRouteToDelete.getStop_route_id() + " not found", stopRouteToDelete);
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
             }
         }
-        return List.of("StopRoute id: " + stopRouteToDelete.getStop_route_id() + " deleted successfully !", stopRouteToDelete);
+        return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
     }
 
-    public void addStopRoutes(StopRoute stopRouteToAdd) throws SQLException {
+    public Object addStopRoutes(StopRoute stopRouteToAdd) throws SQLException {
         String sql = "INSERT INTO stop_route (stop_route_id, stop_id, route_id) VALUES (?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -83,10 +84,11 @@ public class StopRouteRepository {
 
             preparedStatement.executeUpdate();
 
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
         }
     }
 
-    public void updateStopRoutes(StopRoute stopRouteToUpdate) throws SQLException {
+    public Object updateStopRoutes(StopRoute stopRouteToUpdate) throws SQLException {
         String sql = "UPDATE stopRoute SET stop_id = ? , route_id = ? WHERE stop_route_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -106,8 +108,11 @@ public class StopRouteRepository {
                     preparedStatement_id.setInt(3, stopRouteToUpdate.getRoute_id());
  
                     preparedStatement_id.executeUpdate();
+
+                    return new ResponseEntity<Void>(HttpStatus.CREATED);
                 }
             }
+            return new ResponseEntity<Void>(HttpStatus.OK);
         }
 
     }

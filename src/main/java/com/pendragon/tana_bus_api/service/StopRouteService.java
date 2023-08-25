@@ -20,11 +20,11 @@ public class StopRouteService {
         return repository.getAllStopRoutes();
     }
 
-    public StopRoute getStopRouteById(int id) throws SQLException {
+    public Object getStopRouteById(int id) throws SQLException {
         return repository.getStopRouteById(id);
     }
 
-    public List<Object> deleteStopRoute(StopRoute stopRoute) throws SQLException {
+    public Object deleteStopRoute(StopRoute stopRoute) throws SQLException {
         return repository.deleteStopRoute(stopRoute);
     }
 

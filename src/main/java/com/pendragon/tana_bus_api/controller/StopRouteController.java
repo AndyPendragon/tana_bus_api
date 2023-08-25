@@ -28,12 +28,12 @@ public class StopRouteController {
     }
 
     @GetMapping("/stopRoute/{id}")
-    public StopRoute getStopRouteById(@PathVariable int id) throws SQLException {
+    public Object getStopRouteById(@PathVariable int id) throws SQLException {
         return service.getStopRouteById(id);
     }
 
     @DeleteMapping("/stopRoute")
-    public List<Object> deleteStopRoute(@RequestBody StopRoute stopRoute) throws SQLException {
+    public Object deleteStopRoute(@RequestBody StopRoute stopRoute) throws SQLException {
         return service.deleteStopRoute(stopRoute);
     }
 
