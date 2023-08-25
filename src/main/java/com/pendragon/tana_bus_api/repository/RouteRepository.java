@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.pendragon.tana_bus_api.entity.Route;
@@ -40,7 +42,7 @@ public class RouteRepository {
         return allRoutes;
     }
 
-    public Route getRouteById(int id) throws SQLException {
+    public Object getRouteById(int id) throws SQLException {
         String sql = "SELECT * FROM route WHERE route_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -55,13 +57,12 @@ public class RouteRepository {
                         result.getInt("direction_id")
                         );
                     }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+        } 
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 
-    public List<Object> deleteRoute(Route routeToDelete) throws SQLException {
+        }
+
+    public Object deleteRoute(Route routeToDelete) throws SQLException {
         String sql = "DELETE FROM route WHERE route_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -69,13 +70,13 @@ public class RouteRepository {
             int rowsDeleted = preparedStatement.executeUpdate();
 
             if (rowsDeleted == 0) {
-                return List.of("Route id: " + routeToDelete.getRoute_id() + " not found", routeToDelete);
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
             }
         }
-        return List.of("Route id: " + routeToDelete.getRoute_id() + " deleted successfully !", routeToDelete);
+        return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
     }
 
-    public void addRoutes(Route routeToAdd) throws SQLException {
+    public Object addRoutes(Route routeToAdd) throws SQLException {
         String sql = "INSERT INTO route (name, company, direction_id) VALUES (?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -85,11 +86,11 @@ public class RouteRepository {
 
             preparedStatement.executeUpdate();
 
-            // return the getRouteById but by name like
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
         }
     }
 
-    public void updateRoutes(Route routeToUpdate) throws SQLException {
+    public Object updateRoutes(Route routeToUpdate) throws SQLException {
         String sql = "UPDATE route SET name = ? , company = ? , direction_id = ? WHERE route_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -111,8 +112,11 @@ public class RouteRepository {
                     preparedStatement_id.setInt(4, routeToUpdate.getDirection_id());
  
                     preparedStatement_id.executeUpdate();
+
+                    return new ResponseEntity<Void>(HttpStatus.CREATED);
                 }
             }
+            return new ResponseEntity<Void>(HttpStatus.OK);
         }
 
     }

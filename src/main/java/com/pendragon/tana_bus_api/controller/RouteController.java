@@ -28,22 +28,22 @@ public class RouteController {
     }
 
     @GetMapping("/route/{id}")
-    public Route getRouteById(@PathVariable int id) throws SQLException {
+    public Object getRouteById(@PathVariable int id) throws SQLException {
         return service.getRouteById(id);
     }
 
     @DeleteMapping("/route")
-    public List<Object> deleteRoute(@RequestBody Route route) throws SQLException {
+    public Object deleteRoute(@RequestBody Route route) throws SQLException {
         return service.deleteRoute(route);
     }
 
     @PostMapping("/route")
-    public Route addRoutes(@RequestBody Route route) throws SQLException {
+    public Object addRoutes(@RequestBody Route route) throws SQLException {
         return service.addRoutes(route);
     }
 
     @PutMapping("/route")
-    public Route updateRoutes(@RequestBody Route route) throws SQLException {
+    public Object updateRoutes(@RequestBody Route route) throws SQLException {
         return service.updateRoutes(route);
     }
 }

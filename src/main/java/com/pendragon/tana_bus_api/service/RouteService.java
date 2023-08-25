@@ -20,20 +20,20 @@ public class RouteService {
         return repository.getAllRoutes();
     }
 
-    public Route getRouteById(int id) throws SQLException {
+    public Object getRouteById(int id) throws SQLException {
         return repository.getRouteById(id);
     }
 
-    public List<Object> deleteRoute(Route route) throws SQLException {
+    public Object deleteRoute(Route route) throws SQLException {
         return repository.deleteRoute(route);
     }
 
-    public Route addRoutes(Route route) throws SQLException {
+    public Object addRoutes(Route route) throws SQLException {
         this.repository.addRoutes(route);
         return route;
     }
 
-    public Route updateRoutes(Route route) throws SQLException {
+    public Object updateRoutes(Route route) throws SQLException {
         this.repository.updateRoutes(route);
         return route;
     }
