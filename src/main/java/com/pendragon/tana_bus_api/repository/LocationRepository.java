@@ -65,23 +65,25 @@ public class LocationRepository {
             if (rowsDeleted == 0) {
                 return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
             }
+            
         }
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
     }
 
-    public void addLocations(Location locationToAdd) throws SQLException {
-        String sql = "INSERT INTO location (name) VALUES (?)";
+    public Object addLocations(Location locationToAdd) throws SQLException {
+        String sql_add_id = "INSERT INTO location (location_id, name) VALUES (?, ?)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, locationToAdd.getName());
+        try (PreparedStatement preparedStatement_id = connection.prepareStatement(sql_add_id)) {
+            preparedStatement_id.setInt(1, locationToAdd.getLocation_id());
+            preparedStatement_id.setString(2, locationToAdd.getName());
 
-            preparedStatement.executeUpdate();
+            preparedStatement_id.executeUpdate();
 
-            // return the getLocationById but by name like
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
         }
     }
 
-    public void updateLocations(Location locationToUpdate) throws SQLException {
+    public Object updateLocations(Location locationToUpdate) throws SQLException {
         String sql = "UPDATE location SET name = ? WHERE location_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -97,10 +99,13 @@ public class LocationRepository {
                 try (PreparedStatement preparedStatement_id = connection.prepareStatement(sql_add_id)) {
                     preparedStatement_id.setInt(1, locationToUpdate.getLocation_id());
                     preparedStatement_id.setString(2, locationToUpdate.getName());
- 
+                    
                     preparedStatement_id.executeUpdate();
+
+                    return new ResponseEntity<Void>(HttpStatus.CREATED);
                 }
             }
+            return new ResponseEntity<Void>(HttpStatus.OK);
         }
 
     }
