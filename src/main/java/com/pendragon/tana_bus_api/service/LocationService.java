@@ -20,11 +20,11 @@ public class LocationService {
         return repository.getAllLocations();
     }
 
-    public Location getLocationById(int id) throws SQLException {
+    public Object getLocationById(int id) throws SQLException {
         return repository.getLocationById(id);
     }
 
-    public List<Object> deleteLocation(Location location) throws SQLException {
+    public Object deleteLocation(Location location) throws SQLException {
         return repository.deleteLocation(location);
     }
 

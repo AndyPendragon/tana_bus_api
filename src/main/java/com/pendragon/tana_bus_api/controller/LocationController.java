@@ -28,12 +28,12 @@ public class LocationController {
     }
 
     @GetMapping("/location/{id}")
-    public Location getLocationById(@PathVariable int id) throws SQLException {
+    public Object getLocationById(@PathVariable int id) throws SQLException {
         return service.getLocationById(id);
     }
 
     @DeleteMapping("/location")
-    public List<Object> deleteLocation(@RequestBody Location location) throws SQLException {
+    public Object deleteLocation(@RequestBody Location location) throws SQLException {
         return service.deleteLocation(location);
     }
 

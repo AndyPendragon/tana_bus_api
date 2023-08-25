@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.pendragon.tana_bus_api.entity.Location;
@@ -37,7 +39,7 @@ public class LocationRepository {
         return allLocations;
     }
 
-    public Location getLocationById(int id) throws SQLException {
+    public Object getLocationById(int id) throws SQLException {
         String sql = "SELECT * FROM location WHERE location_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -49,13 +51,11 @@ public class LocationRepository {
                         result.getInt("location_id"),
                         result.getString("name"));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return null;
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
     }
 
-    public List<Object> deleteLocation(Location locationToDelete) throws SQLException {
+    public Object deleteLocation(Location locationToDelete) throws SQLException {
         String sql = "DELETE FROM location WHERE location_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -63,10 +63,10 @@ public class LocationRepository {
             int rowsDeleted = preparedStatement.executeUpdate();
 
             if (rowsDeleted == 0) {
-                return List.of("Location id: " + locationToDelete.getLocation_id() + " not found", locationToDelete);
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
             }
         }
-        return List.of("Location id: " + locationToDelete.getLocation_id() + " deleted successfully !", locationToDelete);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
     public void addLocations(Location locationToAdd) throws SQLException {
