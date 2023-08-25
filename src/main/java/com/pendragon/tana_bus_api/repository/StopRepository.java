@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.pendragon.tana_bus_api.entity.Stop;
@@ -41,7 +43,7 @@ public class StopRepository {
         return allStops;
     }
 
-    public Stop getStopById(int id) throws SQLException {
+    public Object getStopById(int id) throws SQLException {
         String sql = "SELECT * FROM stop WHERE stop_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -57,13 +59,11 @@ public class StopRepository {
                         result.getInt("location_id"),
                         result.getInt("next_stop_id"));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return null;
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
     }
 
-    public List<Object> deleteStop(Stop stopToDelete) throws SQLException {
+    public Object deleteStop(Stop stopToDelete) throws SQLException {
         String sql = "DELETE FROM stop WHERE stop_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -71,13 +71,13 @@ public class StopRepository {
             int rowsDeleted = preparedStatement.executeUpdate();
 
             if (rowsDeleted == 0) {
-                return List.of("Stop id: " + stopToDelete.getStop_id() + " not found", stopToDelete);
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
             }
         }
-        return List.of("Stop id: " + stopToDelete.getStop_id() + " deleted successfully !", stopToDelete);
+        return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
     }
 
-    public void addStops(Stop stopToAdd) throws SQLException {
+    public Object addStops(Stop stopToAdd) throws SQLException {
         String sql = "INSERT INTO stop (name, longitude, latitude, location_id, next_stop_id) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -88,10 +88,12 @@ public class StopRepository {
             preparedStatement.setInt(5, stopToAdd.getNext_stop_id());
 
             preparedStatement.executeUpdate();
+
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
         }
     }
 
-    public void updateStops(Stop stopToUpdate) throws SQLException {
+    public Object updateStops(Stop stopToUpdate) throws SQLException {
         String sql = "UPDATE stop SET name = ?, longitude = ?, latitude = ?, location_id = ?, next_stop_id = ? WHERE stop_id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -117,8 +119,11 @@ public class StopRepository {
                     preparedStatement_id.setInt(6, stopToUpdate.getNext_stop_id());
 
                     preparedStatement_id.executeUpdate();
+
+                    return new ResponseEntity<Void>(HttpStatus.CREATED);
                 }
             }
+            return new ResponseEntity<Void>(HttpStatus.OK);
         }
 
     }

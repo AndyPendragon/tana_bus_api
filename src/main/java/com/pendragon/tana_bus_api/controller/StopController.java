@@ -33,12 +33,12 @@ public class StopController {
     }
 
     @GetMapping("/stop/{id}")
-    public Stop getStopById(@PathVariable int id) throws SQLException {
+    public Object getStopById(@PathVariable int id) throws SQLException {
         return service.getStopById(id);
     }
 
     @DeleteMapping("/stop")
-    public List<Object> deleteStop(@RequestBody Stop stop) throws SQLException {
+    public Object deleteStop(@RequestBody Stop stop) throws SQLException {
         return service.deleteStop(stop);
     }
 

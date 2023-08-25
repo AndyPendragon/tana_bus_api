@@ -20,11 +20,11 @@ public class StopService {
         return repository.getAllStops();
     }
 
-    public Stop getStopById(int id) throws SQLException {
+    public Object getStopById(int id) throws SQLException {
         return repository.getStopById(id);
     }
 
-    public List<Object> deleteStop(Stop stop) throws SQLException {
+    public Object deleteStop(Stop stop) throws SQLException {
         return repository.deleteStop(stop);
     }
 
