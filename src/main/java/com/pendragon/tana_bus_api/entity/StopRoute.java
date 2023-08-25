@@ -12,6 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class StopRoute {
+    private int stop_route_id;
     private int stop_id;
     private int route_id;
 }
