@@ -25,6 +25,11 @@ Go to the project directory
 ```bash
   cd ./tana_bus_api
 ```
+Install the  database (Postgresql) 
+
+`
+src/main/resources/migrations/v_1.0.sql
+`
 
 Into your IDE : Install dependencies
 
