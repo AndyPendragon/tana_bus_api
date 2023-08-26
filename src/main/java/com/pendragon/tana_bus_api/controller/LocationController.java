@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pendragon.tana_bus_api.entity.Location;
@@ -30,6 +31,11 @@ public class LocationController {
     @GetMapping("/location/{id}")
     public Object getLocationById(@PathVariable int id) throws SQLException {
         return service.getLocationById(id);
+    }
+
+    @GetMapping("/location/search")
+    public Object searchLocationByName(@RequestParam String q) throws SQLException { 
+        return service.searchLocationByName(q);
     }
 
     @DeleteMapping("/location")

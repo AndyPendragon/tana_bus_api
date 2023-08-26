@@ -55,6 +55,26 @@ public class LocationRepository {
         return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
     }
 
+    public Object searchLocationByName(String q) throws SQLException {
+        List<Location> allLocations = new ArrayList<>();
+        String sql = "SELECT * FROM location WHERE name ILIKE ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, "%" + q + "%");
+            ResultSet result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                allLocations.add(new Location(
+                        result.getInt("location_id"),
+                        result.getString("name")));
+            }
+        }
+        if (allLocations.isEmpty()) {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);   
+        }
+        return allLocations;
+    }
+
     public Object deleteLocation(Location locationToDelete) throws SQLException {
         String sql = "DELETE FROM location WHERE location_id = ?";
 

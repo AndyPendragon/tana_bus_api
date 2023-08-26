@@ -24,6 +24,10 @@ public class LocationService {
         return repository.getLocationById(id);
     }
 
+    public Object searchLocationByName(String q) throws SQLException {
+    return repository.searchLocationByName(q);
+    }
+
     public Object deleteLocation(Location location) throws SQLException {
         return repository.deleteLocation(location);
     }
