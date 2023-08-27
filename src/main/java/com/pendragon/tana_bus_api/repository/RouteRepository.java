@@ -33,8 +33,7 @@ public class RouteRepository {
                         result.getInt("route_id"),
                         result.getString("name"),
                         result.getString("company"),
-                        result.getInt("direction_id")
-                        ));
+                        result.getInt("direction_id")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,13 +53,34 @@ public class RouteRepository {
                         result.getInt("route_id"),
                         result.getString("name"),
                         result.getString("company"),
-                        result.getInt("direction_id")
-                        );
-                    }
-        } 
+                        result.getInt("direction_id"));
+            }
+        }
         return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 
+    }
+
+    public Object searchRouteByName(String q) throws SQLException {
+        List<Route> allRoutes = new ArrayList<>();
+        String sql = "SELECT * FROM route WHERE name ILIKE ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, "%" + q + "%");
+            ResultSet result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                allRoutes.add(new Route(
+                        result.getInt("route_id"),
+                        result.getString("name"),
+                        result.getString("company"),
+                        result.getInt("direction_id")));
+            }
         }
+        if (allRoutes.isEmpty()) {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }
+        return allRoutes;
+    }
 
     public Object deleteRoute(Route routeToDelete) throws SQLException {
         String sql = "DELETE FROM route WHERE route_id = ?";
@@ -110,7 +130,7 @@ public class RouteRepository {
                     preparedStatement_id.setString(2, routeToUpdate.getName());
                     preparedStatement_id.setString(3, routeToUpdate.getCompany());
                     preparedStatement_id.setInt(4, routeToUpdate.getDirection_id());
- 
+
                     preparedStatement_id.executeUpdate();
 
                     return new ResponseEntity<Void>(HttpStatus.CREATED);

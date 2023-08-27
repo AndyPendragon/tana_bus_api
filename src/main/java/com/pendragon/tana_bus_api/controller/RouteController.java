@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pendragon.tana_bus_api.entity.Route;
@@ -30,6 +31,11 @@ public class RouteController {
     @GetMapping("/route/{id}")
     public Object getRouteById(@PathVariable int id) throws SQLException {
         return service.getRouteById(id);
+    }
+    
+    @GetMapping("/route/search")
+    public Object searchRouteByName(@RequestParam String q) throws SQLException { 
+        return service.searchRouteByName(q);
     }
 
     @DeleteMapping("/route")

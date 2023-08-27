@@ -24,6 +24,10 @@ public class RouteService {
         return repository.getRouteById(id);
     }
 
+    public Object searchRouteByName(String q) throws SQLException {
+        return repository.searchRouteByName(q);
+    }
+
     public Object deleteRoute(Route route) throws SQLException {
         return repository.deleteRoute(route);
     }
