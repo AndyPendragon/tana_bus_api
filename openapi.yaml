@@ -500,3 +500,4 @@ components:
         route_id:
           type: integer
           format: int64
+          example: 20
