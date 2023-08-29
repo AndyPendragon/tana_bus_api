@@ -1,0 +1,502 @@
+openapi: 3.0.3
+
+info:
+  title: TANA BUS API
+  version: 1.0.1
+  description: An interface for bus routes and stops in Antananarivo, Madagascar
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /stops:
+    get:
+      tags:
+        - Stop
+      summary: Show all the stops
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stop'
+        '500':
+          description: Internal Server Error
+  /stop/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: the stop identifier, as stop_id 
+      schema:
+        type: integer
+        format: int64
+    get:
+      tags:
+        - Stop
+      summary: Show the stops
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stop'
+        '404':
+          description: Not Found          
+  /stop:
+    post:
+      tags:
+        - Stop
+      summary: Add a new Stop
+      requestBody:
+        description: Create a new stop
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stop'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stop'
+        '500':
+          description: Internal Server Error
+    
+    put:
+      tags:
+        - Stop
+      summary: Update a stop
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stop'
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stop'
+        '405':
+          description: Invalid input
+          
+    delete:
+      tags:
+        - Stop
+      description: delete a stop
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stop'
+      responses:
+        '202':
+          description: No content
+        '400':
+          description: Invalid Stop value
+  /routes:
+    get:
+      tags:
+        - Route
+      summary: Show all the Route
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '500':
+          description: Internal Server 
+  /route/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: the route identifier, as route_id 
+        schema:
+          type: integer
+          format: int64
+    get:
+      tags:
+        - Route
+      summary: Show the Route
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '500':
+          description: Internal Server Error
+  /route:
+    get:
+      tags:
+        - Route
+      summary: Show the Route
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '500':
+          description: Internal Server Error
+          
+    post:
+      tags:
+        - Route
+      summary: Add a new Route
+      requestBody:
+        description: Create a new Route
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '500':
+          description: Internal Server Error
+    
+    put:
+      tags:
+        - Route
+      summary: Update a Route
+      operationId: updateRoute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '405':
+          description: Invalid input
+          
+    delete:
+      tags:
+        - Route
+      summary: Delete a Route
+      description: delete a Route
+      operationId: deleteRoute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid Route value
+  /locations:
+    get:
+      tags:
+        - Location
+      summary: Show all the Location
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '500':
+          description: Internal Server 
+  /location/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: the location identifier, as location_id 
+        schema:
+          type: integer
+          format: int64
+    get:
+      tags:
+        - Location
+      summary: Show the Location
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '500':
+          description: Internal Server Error
+  /location:
+    get:
+      tags:
+        - Location
+      summary: Show the Location
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '500':
+          description: Internal Server Error
+          
+    post:
+      tags:
+        - Location
+      summary: Add a new Location
+      requestBody:
+        description: Create a new Location
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '500':
+          description: Internal Server Error
+    
+    put:
+      tags:
+        - Location
+      summary: Update a Location
+      operationId: updateLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '405':
+          description: Invalid input
+          
+    delete:
+      tags:
+        - Location
+      summary: Delete a Location
+      description: delete a Location
+      operationId: deleteLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid Location value
+  /stopRoutes:
+    get:
+      tags:
+        - StopRoute
+      summary: Show all the StopRoute
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopRoute'
+        '500':
+          description: Internal Server 
+  /stopRoute/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: the stopRoute identifier, as stopRoute_id 
+        schema:
+          type: integer
+          format: int64
+    get:
+      tags:
+        - StopRoute
+      summary: Show the StopRoute
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopRoute'
+        '500':
+          description: Internal Server Error
+  /stopRoute:
+    get:
+      tags:
+        - StopRoute
+      summary: Show the StopRoute
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopRoute'
+        '500':
+          description: Internal Server Error
+          
+    post:
+      tags:
+        - StopRoute
+      summary: Add a new StopRoute
+      requestBody:
+        description: Create a new StopRoute
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopRoute'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopRoute'
+        '500':
+          description: Internal Server Error
+    
+    put:
+      tags:
+        - StopRoute
+      summary: Update a StopRoute
+      operationId: updateStopRoute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopRoute'
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopRoute'
+        '405':
+          description: Invalid input
+          
+    delete:
+      tags:
+        - StopRoute
+      summary: Delete a StopRoute
+      description: delete a StopRoute
+      operationId: deleteStopRoute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopRoute'
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Not found
+components:
+  schemas:
+    Location:
+      type: object
+      properties:
+        location_id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          format: int64
+          example: Merry
+    Stop:
+      type: object
+      properties:
+        stop_id:
+          type: integer
+          format: int64
+          example: 3
+        name:
+          type: string
+          format: int64
+          example: Mausolée
+        longitude:
+          type: integer
+          format: double
+          example: -456.1
+        latitude:
+          type: integer
+          format: double
+          example: -654.1
+        location_id:
+          type: integer
+          format: int64
+          example: 3
+        next_stop_id:
+          type: integer
+          format: int64
+          example: 3
+    Route:
+      type: object
+      properties:
+        route_id:
+          type: integer
+          format: int64
+          example: 2
+        name:
+          type: string
+          format: int64
+          example: 194 Manga
+        company:
+          type: string
+          format: int64
+          example: Mirindra
+        direction_id:
+          type: integer
+          format: int64
+          example: 3
+    StopRoute:
+      type: object
+      properties:
+        stop_route_id:
+          type: integer
+          format: int64
+          example: 2
+        stop_id:
+          type: integer
+          format: int64
+          example: 13
+        route_id:
+          type: integer
+          format: int64
